@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mac/stocker/include/stockerAPI.hpp
+string.h
+-
+curl/curl.h
+-
+ctime
+-
+iomanip
+-
+sstream
+-
+iostream
+-
+vector
+-
+stdio.h
+-
+
+/home/mac/stocker/main.cpp
+iostream
+-
+include/stockerAPI.hpp
+/home/mac/stocker/include/stockerAPI.hpp
+
