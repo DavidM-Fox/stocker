@@ -36,17 +36,20 @@ namespace stocker
             std::vector<std::string> m_date_end; 
             std::string m_interval;
     };
-    
+
+    /*
+    * quote constructor: m_url, m_sybol, m_date_start, m_date_end, m_interval
+    * set to default
+    */
     quote::quote(/* args */) :
     m_url("https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1={period_start}&period2={period_end}&interval={interval}&events=history"),
     m_symbol("---"),
     m_date_start(2, ""),
-    m_date_end(2, "") { }
+    m_date_end(2, ""),
+    m_interval("1wk") { }
 
     /*
-    *
-    * Sets the interval of historical stock data: "1d", "1wk", "1mo"
-    *
+    * Sets the interval of historical stock data: ["1d", "1wk", "1mo"]
     */
     void quote::set_interval(std::string t_interval)
     {
@@ -54,10 +57,9 @@ namespace stocker
     }
     
     /*
-    *
-    * Takes an end and start date in the format YYYY-MM-DD, converting both strings to unix timestamps.
-    * Sets m_date_start & m_date_end vectors to ["YYYY-MM-DD", "Unix Timestamp"]
-    *
+    * Takes an end and start date in the format YYYY-MM-DD, converting both strings 
+    * to unix timestamps. Sets m_date_start & m_date_end vectors to 
+    * ["YYYY-MM-DD", "Unix Timestamp"]
     */
     void quote::set_period(std::string t_date_start, std::string t_date_end)
     {
@@ -97,6 +99,16 @@ namespace stocker
         this->m_date_end[1] = std::to_string(epoch);
     }
 
+    /*
+    * Returns the period of the quote:
+    * std::vector<std::vector<std::string>>
+    * 
+    * [
+    *   ["YYYY-MM-DD", UNIX_TIMESTAMP], //date start
+    *   ["YYYY-MM-DD", UNIX_TIMESTAMP]  //date end
+    * ]
+    * 
+    */
     stocker::period quote::get_period()
     {
         stocker::period this_period{this->m_date_start, this->m_date_end};
@@ -104,8 +116,10 @@ namespace stocker
     }
     
     /*
-    *
-    * std::cout << Time Period of this Quote
+    * std::cout << the period of the quote:
+    * 
+    * START: YYYY-MM-DD -- (UNIX_TIMESTAMP)
+    * END--: YYYY-MM-DD -- (UNIX_TIMESTAMP)
     * 
     */
     void quote::print_period()
@@ -114,15 +128,13 @@ namespace stocker
         std::cout << "END--: " << this->m_date_end[0]   << " -- (" << this->m_date_end[1]   << ")" << '\n';
     }
     
+    /*
+    * Sets the quote symbol ex: "GME"
+    */
     void quote::set_symbol(std::string t_symbol)
     {
-
+        this->m_symbol = t_symbol;
     }
     
-    quote::~quote()
-    {
-    
-    }
-    
-    //
+    quote::~quote() { }
 }
