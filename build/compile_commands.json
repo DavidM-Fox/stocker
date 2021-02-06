@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/mac/stocker/build",
-  "command": "/usr/bin/g++-7   -g -o CMakeFiles/stocker.dir/main.cpp.o -c /home/mac/stocker/main.cpp",
-  "file": "/home/mac/stocker/main.cpp"
-}
-]
