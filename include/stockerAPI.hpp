@@ -26,6 +26,9 @@ namespace stocker
             void set_symbol(std::string t_symbol);
             void set_period(std::string t_date_start, std::string t_date_end);
             void set_interval(std::string t_interval);
+
+
+            std::string get_symbol();
             
             void download_quote_data(std::string filename);
             
@@ -42,6 +45,7 @@ namespace stocker
             std::string m_date_start; 
             std::string m_date_end; 
             std::string m_interval;
+            std::string m_data_col;
             std::string m_url;
     };
     
@@ -78,6 +82,11 @@ namespace stocker
     void quote::set_interval(std::string t_interval)
     {
         this->m_interval = t_interval;
+    }
+    
+    std::string quote::get_symbol() 
+    {
+        return this->m_symbol;
     }
 
     // Downloads historical stock data for quote
