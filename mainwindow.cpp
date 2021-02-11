@@ -11,11 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Import ui from QT Designer
     ui->setupUi(this);
 
-    // Set default dates for data form
-    ui->startDateEdit->setDate(QDate::currentDate());
-    ui->endDateEdit->setDate(QDate::currentDate());
-
-    connect(ui->getDataButton, &QPushButton::released, this, &MainWindow::on_getDataButton_clicked);
+    set_ui_defaults();
+    // set_connects();
 }
 
 // MainWindow Deconstructor
@@ -25,34 +22,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::set_ui_defaults() 
+{
+    // Set default dates for data form
+    ui->startDateEdit->setDate(QDate::currentDate());
+    ui->endDateEdit->setDate(QDate::currentDate());
+}
+
+void MainWindow::set_connects() 
+{
+    connect(ui->getDataButton, &QPushButton::released, this, &MainWindow::on_getDataButton_clicked);
+}
+
 // Constructs quote based on form data when "Get Data" is clicked and updates stock_data_tableView
 void MainWindow::on_getDataButton_clicked()
 {
-    std::string symbol = ui->symbolComboBox->currentText().toUtf8().constData();
+    std::string ticker = ui->tickerLineEdit->text().toUtf8().constData();
     stocker::quote* Quote = new stocker::quote
     (
-        symbol,
+        ticker,
         ui->startDateEdit->date().toString("yyyy-MM-dd").toUtf8().constData(),
         ui->endDateEdit->date().toString("yyyy-MM-dd").toUtf8().constData(),
         interval_convert(ui->intervalComboBox->currentText().toUtf8().constData())
     );
 
     Quote->print_quote_info();
-    std::string output_file = "..\\..\\stock_data\\" + symbol + ".csv";
+    std::string output_file = "..\\..\\stock_data\\" + ticker + ".csv";
     Quote->download_quote_data(output_file);
-    process_stock_data(output_file, symbol);
+    // int test = process_stock_data(output_file, ticker);
 
     delete Quote;
     Quote = NULL;
-
 }
 
 // Creates a model from downloaded .csv file and updates stock_data_tableView
-void MainWindow::process_stock_data(std::string output_file, std::string t_symbol) 
+int MainWindow::process_stock_data(std::string output_file, std::string t_symbol) 
 {
-
     // Build model from stock data .csv file
     QStandardItemModel *model = new QStandardItemModel;
+    QStringList categories;
     QFile file(QString::fromStdString(output_file));
     if (file.open(QIODevice::ReadOnly))
     {
@@ -62,29 +70,37 @@ void MainWindow::process_stock_data(std::string output_file, std::string t_symbo
 
         while (!in.atEnd())
         {
-
             // read one line from textstream(separated by "\n")
-            QString fileLine = in.readLine();
+            QString line = in.readLine();
 
-            // parse the read line into separate pieces(tokens) with "," as the delimiter
-            QStringList lineToken = fileLine.split(",", QString::SkipEmptyParts);
+            // Skip csv header line
+            if (line.startsWith("Date"))
+                continue;
+
+            // parse the read line into separate pieces(tokens)
+            QStringList lineToken = line.split(",");
 
             // load parsed data to model accordingly
             for (int j = 0; j < lineToken.size(); j++)
             {
                 QString value = lineToken.at(j);
+                if (j == 0)
+                {
+                    categories << value;
+                }
                 QStandardItem *item = new QStandardItem(value);
                 model->setItem(lineindex, j, item);
             }
-
             lineindex++;   
         }
-
     file.close();
+    }
+    else
+    {
+        return -1;
     }
 
     // Set headers for model
-    model->removeRow(0);
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Date"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Open"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("High"));
@@ -92,32 +108,56 @@ void MainWindow::process_stock_data(std::string output_file, std::string t_symbo
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Close"));
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("Adj Close"));
     model->setHeaderData(6, Qt::Horizontal, QObject::tr("Volume"));
-    
+/*    
     // Update table view
     ui->stock_data_tableView->setModel(model);
     ui->stock_data_tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->stock_data_tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+*/
+    // Create candlestick series
+    QCandlestickSeries *series = new QCandlestickSeries();
+    series->setName(QString::fromStdString(output_file));
+    series->setIncreasingColor(QColor(Qt::green));
+    series->setDecreasingColor(QColor(Qt::red));
 
-    // // Create chart from model data
-    // QChart *chart = new QChart();
-    // chart->setAnimationOptions(QChart::AllAnimations);
-    
-    // QLineSeries *series = new QLineSeries();
 
-    // series->setName(QString::fromStdString(t_symbol));
 
-    // QVXYModelMapper *mapper = new QVXYModelMapper(this);
+    QHCandlestickModelMapper *mapper = new QHCandlestickModelMapper();
+    mapper->setModel(model);
+    mapper->setFirstSetRow(1);
+    mapper->setTimestampColumn(0);
+    mapper->setOpenColumn(1);
+    mapper->setHighColumn(2);
+    mapper->setLowColumn(3);
+    mapper->setCloseColumn(4);
+    mapper->setSeries(series);
+    // mapper->lastSetRow(line_index)
 
-    // mapper->setXColumn(0);
-    // mapper->setYColumn(1);
-    // mapper->setSeries(series);
-    // mapper->setModel(model);
-    // chart->addSeries(series);
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    std::string chart_title = t_symbol + " Historical Data";
+    chart->setTitle(QString::fromStdString(chart_title));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->createDefaultAxes();
 
-    // chart->createDefaultAxes();
-    // QChartView *chartView = new QChartView(chart);
-    // chartView->setRenderHint(QPainter::Antialiasing);
-    // chartView->setParent(ui->chart_frame);
+    chart->createDefaultAxes();
+
+    QBarCategoryAxis *axisX = qobject_cast<QBarCategoryAxis *>(chart->axes(Qt::Horizontal).at(0));
+    axisX->setCategories(categories);
+
+    QValueAxis *axisY = qobject_cast<QValueAxis *>(chart->axes(Qt::Vertical).at(0));
+    axisY->setMax(axisY->max() * 1.01);
+    axisY->setMin(axisY->min() * 0.99);
+
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    ui->gridLayout->addWidget(chartView,0,1);
+
+    return 1;
+
 }
 
 

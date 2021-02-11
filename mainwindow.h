@@ -22,8 +22,11 @@ class MainWindow : public QMainWindow
     private:
         Ui::MainWindow *ui;
 
+        void set_ui_defaults();
+        void set_connects();
+
         void on_getDataButton_clicked();
-        void process_stock_data(std::string output_file, std::string t_symbol);
+        int process_stock_data(std::string output_file, std::string t_symbol);
         std::string interval_convert(std::string from);
 
 
