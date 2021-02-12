@@ -32,6 +32,8 @@
 *.app
 
 # Folders to ignore
+.vscode/
 build/
 stock_data/
+*.key
 *.user
