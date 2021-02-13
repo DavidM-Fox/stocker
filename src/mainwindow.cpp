@@ -1,56 +1,83 @@
 #include "../inc/mainwindow.h"
-#include "../inc/stocker_api.hpp"
 #include "../inc/./ui_mainwindow.h"
 #include "../inc/QCandlestickChart.h"
+#include "../inc/stocker_api.hpp"
 
 // MainWindow Constructor for stocker application
-MainWindow::MainWindow(QWidget *parent) : 
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     // Import ui from QT Designer
     ui->setupUi(this);
-    ui->homeViewButton->setIcon(QIcon("..\\..\\icons\\icons8-home-64.png"));
-    ui->stockViewButton->setIcon(QIcon("..\\..\\icons\\icons8-stocks-64.png"));
-    ui->dataViewButton->setIcon(QIcon("..\\..\\icons\\icons8-data-grid-64.png"));
-    
+    ui->stackedWidget->setCurrentIndex(0);
     configure_buttons();
+    configure_connections();
 }
 
 // MainWindow Deconstructor
-MainWindow::~MainWindow()
+MainWindow::~MainWindow() { delete ui; }
+
+// Slots for signals
+
+void MainWindow::on_exit() { QCoreApplication::quit(); }
+void MainWindow::on_homeViewButton() { ui->stackedWidget->setCurrentIndex(0); }
+void MainWindow::on_stockViewButton()
 {
-    delete ui;
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->newStockWidget->setCurrentIndex(0);
+}
+void MainWindow::on_newStockButton()
+{
+    ui->newStockWidget->setCurrentIndex(1);
+    ui->stockLineEdit->clear();
+}
+void MainWindow::on_newStockEdit()
+{
+    QListWidgetItem *new_item = new QListWidgetItem;
+    new_item->setText(ui->stockLineEdit->text());
+    ui->stockList->insertItem(0, new_item);
+    ui->newStockWidget->setCurrentIndex(0);
+}
+void MainWindow::toUpper(const QString &text)
+{
+    QLineEdit *le = qobject_cast<QLineEdit *>(sender());
+    if (!le)
+        return;
+    le->setText(text.toUpper());
 }
 
+void MainWindow::onStockListItemClicked(QListWidgetItem *item)
+{
+    qDebug() << item->text();
+}
 
 void MainWindow::configure_buttons()
 {
-    ui->homeViewButton->setIcon(QIcon("..\\..\\icons\\icons8-home-64.png"));
-    ui->stockViewButton->setIcon(QIcon("..\\..\\icons\\icons8-stocks-64.png"));
-    ui->dataViewButton->setIcon(QIcon("..\\..\\icons\\icons8-data-grid-64.png"));
+    QIcon homeIcon = QIcon("..\\..\\icons\\icons8-home-64.png");
+    QIcon stockIcon = QIcon("..\\..\\icons\\icons8-stocks-64.png");
+    QIcon newIcon = QIcon("C:/github/stocker/icons/icons8-plus-64.png");
 
-    // connect(ui->homeViewButton, ui->homeViewButton->&QPushButton::isChecked, this, &MainWindow::on_homeViewButton());
-    // connect(ui->stockViewButton, &QPushButton::isChecked, this, &MainWindow::on_stockViewButton());
-    // connect(ui->dataViewButton, &QPushButton::isChecked, this, &MainWindow::on_dataViewButton());
-    
-    connect(ui->homeViewButton, &QPushButton::released, this, &MainWindow::on_homeViewButton);
-    connect(ui->stockViewButton, &QPushButton::released, this, &MainWindow::on_stockViewButton);
-    connect(ui->dataViewButton, &QPushButton::released, this, &MainWindow::on_dataViewButton);
+    ui->homeViewButton->setIcon(homeIcon);
+    ui->stockViewButton->setIcon(stockIcon);
+    ui->newStockButton->setIcon(newIcon);
 }
 
-void MainWindow::on_homeViewButton()
+void MainWindow::configure_connections()
 {
-    ui->homeFrame->show();
-    
-}
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::on_exit);
 
-void MainWindow::on_stockViewButton()
-{
-    ui->homeFrame->hide();
-}
+    connect(ui->homeViewButton, &QPushButton::released, this,
+            &MainWindow::on_homeViewButton);
+    connect(ui->stockViewButton, &QPushButton::released, this,
+            &MainWindow::on_stockViewButton);
+    connect(ui->newStockButton, &QPushButton::released, this,
+            &MainWindow::on_newStockButton);
 
-void MainWindow::on_dataViewButton()
-{
-    ui->homeFrame->hide();
+    connect(ui->stockLineEdit, &QLineEdit::returnPressed, this,
+            &MainWindow::on_newStockEdit);
+    connect(ui->stockLineEdit, SIGNAL(textChanged(const QString &)), this,
+            SLOT(toUpper(const QString &)));
+
+    connect(ui->stockList, SIGNAL(itemClicked(QListWidgetItem *)), this,
+            SLOT(onStockListItemClicked(QListWidgetItem *)));
 }
