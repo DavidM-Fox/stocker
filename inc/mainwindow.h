@@ -17,9 +17,15 @@ class MainWindow : public QMainWindow
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
+    private slots:
+        void on_homeViewButton();
+        void on_stockViewButton();
+        void on_dataViewButton();
+
     private:
         Ui::MainWindow *ui;
-        void set_chart(std::string output_file);
+
+        void configure_buttons();
 };
 
 #endif // MAINWINDOW_H
