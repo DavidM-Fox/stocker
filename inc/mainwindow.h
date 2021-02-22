@@ -12,6 +12,10 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+namespace appView {
+enum view { HOMEVIEW = 0, STOCKVIEW };
+}
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -24,18 +28,19 @@ private:
     void setupMainWindow();
 
 private slots:
-    void on_homeViewButton();
-    void on_stockViewButton();
-    void on_newStockButton();
-    void on_newStockEdit();
-    void toUpper(const QString &text);
-    void onStockListItemClicked(QListWidgetItem *item);
+    void on_switchToHomeViewButton();
+    void on_switchToStockViewButton();
+
+    // void on_newStockButton();
+    // void on_newStockEdit();
+    // void toUpper(const QString &text);
+    // void onStockListItemClicked(QListWidgetItem *item);
 
 private:
-    static QString icon_dir;
-    static QIcon icon_homeView;
-    static QIcon icon_stockView;
-    static QIcon icon_newSymbol;
+    QString icon_dir;
+    QIcon icon_homeView;
+    QIcon icon_stockView;
+    QIcon icon_newSymbol;
 };
 
 #endif // MAINWINDOW_H

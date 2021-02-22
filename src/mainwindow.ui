@@ -55,7 +55,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QFrame" name="viewSelectFrame">
+     <widget class="QFrame" name="frame_selectAppView">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -121,7 +121,7 @@ border-style:none;
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="homeViewButton">
+        <widget class="QPushButton" name="button_switchToHomeView">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -180,7 +180,7 @@ border-style:none;
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="stockViewButton">
+        <widget class="QPushButton" name="button_switchToStockView">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -236,7 +236,7 @@ border-style:none;
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="vspacer1">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -252,7 +252,7 @@ border-style:none;
      </widget>
     </item>
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="stacked_appView">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>1</horstretch>
@@ -265,7 +265,7 @@ border-style:none;
       <property name="currentIndex">
        <number>1</number>
       </property>
-      <widget class="QWidget" name="homeView">
+      <widget class="QWidget" name="page_homeView">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -293,7 +293,7 @@ color: rgb(255, 255, 255);</string>
          <number>0</number>
         </property>
         <item row="1" column="1">
-         <widget class="QTextBrowser" name="textBrowser">
+         <widget class="QTextBrowser" name="textBrowser_homeInfo">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -325,9 +325,9 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="2" column="1">
-         <layout class="QFormLayout" name="formLayout">
+         <layout class="QFormLayout" name="form_apiKey">
           <item row="0" column="0">
-           <widget class="QLabel" name="keyLabel">
+           <widget class="QLabel" name="label_api">
             <property name="autoFillBackground">
              <bool>false</bool>
             </property>
@@ -337,7 +337,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="keyLineEdit">
+           <widget class="QLineEdit" name="lineEdit_apiKey">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -352,7 +352,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item row="0" column="1">
-         <spacer name="verticalSpacer_6">
+         <spacer name="vspacer2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -365,7 +365,7 @@ p, li { white-space: pre-wrap; }
          </spacer>
         </item>
         <item row="3" column="1">
-         <spacer name="verticalSpacer_7">
+         <spacer name="vspacer3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -378,7 +378,7 @@ p, li { white-space: pre-wrap; }
          </spacer>
         </item>
         <item row="1" column="0">
-         <spacer name="horizontalSpacer_3">
+         <spacer name="hspacer1">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -391,7 +391,7 @@ p, li { white-space: pre-wrap; }
          </spacer>
         </item>
         <item row="1" column="2">
-         <spacer name="horizontalSpacer_4">
+         <spacer name="hspacer2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -405,7 +405,7 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="stockView">
+      <widget class="QWidget" name="page_stockView">
        <property name="styleSheet">
         <string notr="true">background-color: rgb(25, 25, 25);</string>
        </property>
@@ -422,238 +422,13 @@ p, li { white-space: pre-wrap; }
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
-         <widget class="QFrame" name="stockFrame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>30</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(38, 39, 40);
-border-color: rgb(255, 255, 255);
-color: rgb(255, 255, 255);</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item alignment="Qt::AlignTop">
-            <widget class="QStackedWidget" name="newStockWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="lineWidth">
-              <number>0</number>
-             </property>
-             <property name="currentIndex">
-              <number>1</number>
-             </property>
-             <widget class="QWidget" name="page1">
-              <layout class="QGridLayout" name="gridLayout">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item row="0" column="0">
-                <widget class="QPushButton" name="newStockButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new stock&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QPushButton:hover{
-background-color:rgb(81, 81, 81);
-}
-QPushButton{
-border-style:none;
-}</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../icons/icons8-plus-64.png</normaloff>../icons/icons8-plus-64.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>32</width>
-                   <height>32</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="page2">
-              <layout class="QGridLayout" name="gridLayout_4">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item row="0" column="0">
-                <widget class="QLineEdit" name="stockLineEdit">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QLineEdit:hover{
-background-color:rgb(81, 81, 81);
-}</string>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Symbol</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignVCenter">
-            <widget class="QLabel" name="label">
-             <property name="frameShape">
-              <enum>QFrame::Panel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stocks&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QListWidget" name="stockList">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="lineWidth">
-              <number>0</number>
-             </property>
-             <property name="midLineWidth">
-              <number>0</number>
-             </property>
-             <property name="sortingEnabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
      </widget>
     </item>
-    <item>
-     <spacer name="spacingView">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menu_bar">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -679,7 +454,7 @@ background:rgb(81, 81, 81);
    <property name="defaultUp">
     <bool>false</bool>
    </property>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="menu_file">
     <property name="styleSheet">
      <string notr="true">QMenu::item:selected{
 background:rgb(81, 81, 81);
@@ -688,16 +463,16 @@ background:rgb(81, 81, 81);
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionExit"/>
+    <addaction name="action_exit"/>
    </widget>
-   <addaction name="menuFile"/>
+   <addaction name="menu_file"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar">
+  <widget class="QStatusBar" name="status_bar">
    <property name="styleSheet">
     <string notr="true">background-color: rgb(51, 51, 51);</string>
    </property>
   </widget>
-  <action name="actionExit">
+  <action name="action_exit">
    <property name="text">
     <string>Exit</string>
    </property>

@@ -19,7 +19,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -36,43 +35,30 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionExit;
+    QAction *action_exit;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
-    QFrame *viewSelectFrame;
+    QFrame *frame_selectAppView;
     QVBoxLayout *verticalLayout;
-    QPushButton *homeViewButton;
-    QPushButton *stockViewButton;
-    QSpacerItem *verticalSpacer;
-    QStackedWidget *stackedWidget;
-    QWidget *homeView;
+    QPushButton *button_switchToHomeView;
+    QPushButton *button_switchToStockView;
+    QSpacerItem *vspacer1;
+    QStackedWidget *stacked_appView;
+    QWidget *page_homeView;
     QGridLayout *gridLayout_2;
-    QTextBrowser *textBrowser;
-    QFormLayout *formLayout;
-    QLabel *keyLabel;
-    QLineEdit *keyLineEdit;
-    QSpacerItem *verticalSpacer_6;
-    QSpacerItem *verticalSpacer_7;
-    QSpacerItem *horizontalSpacer_3;
-    QSpacerItem *horizontalSpacer_4;
-    QWidget *stockView;
+    QTextBrowser *textBrowser_homeInfo;
+    QFormLayout *form_apiKey;
+    QLabel *label_api;
+    QLineEdit *lineEdit_apiKey;
+    QSpacerItem *vspacer2;
+    QSpacerItem *vspacer3;
+    QSpacerItem *hspacer1;
+    QSpacerItem *hspacer2;
+    QWidget *page_stockView;
     QGridLayout *gridLayout_3;
-    QSpacerItem *horizontalSpacer;
-    QFrame *stockFrame;
-    QVBoxLayout *verticalLayout_2;
-    QStackedWidget *newStockWidget;
-    QWidget *page1;
-    QGridLayout *gridLayout;
-    QPushButton *newStockButton;
-    QWidget *page2;
-    QGridLayout *gridLayout_4;
-    QLineEdit *stockLineEdit;
-    QLabel *label;
-    QListWidget *stockList;
-    QSpacerItem *spacingView;
-    QMenuBar *menubar;
-    QMenu *menuFile;
-    QStatusBar *statusbar;
+    QMenuBar *menu_bar;
+    QMenu *menu_file;
+    QStatusBar *status_bar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -83,8 +69,8 @@ public:
         MainWindow->setMinimumSize(QSize(600, 600));
         MainWindow->setCursor(QCursor(Qt::ArrowCursor));
         MainWindow->setAutoFillBackground(false);
-        actionExit = new QAction(MainWindow);
-        actionExit->setObjectName(QString::fromUtf8("actionExit"));
+        action_exit = new QAction(MainWindow);
+        action_exit->setObjectName(QString::fromUtf8("action_exit"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setEnabled(true);
@@ -97,17 +83,17 @@ public:
         horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        viewSelectFrame = new QFrame(centralwidget);
-        viewSelectFrame->setObjectName(QString::fromUtf8("viewSelectFrame"));
+        frame_selectAppView = new QFrame(centralwidget);
+        frame_selectAppView->setObjectName(QString::fromUtf8("frame_selectAppView"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(viewSelectFrame->sizePolicy().hasHeightForWidth());
-        viewSelectFrame->setSizePolicy(sizePolicy1);
-        viewSelectFrame->setMinimumSize(QSize(64, 0));
-        viewSelectFrame->setMaximumSize(QSize(64, 16777215));
-        viewSelectFrame->setAutoFillBackground(false);
-        viewSelectFrame->setStyleSheet(QString::fromUtf8("QFrame{\n"
+        sizePolicy1.setHeightForWidth(frame_selectAppView->sizePolicy().hasHeightForWidth());
+        frame_selectAppView->setSizePolicy(sizePolicy1);
+        frame_selectAppView->setMinimumSize(QSize(64, 0));
+        frame_selectAppView->setMaximumSize(QSize(64, 16777215));
+        frame_selectAppView->setAutoFillBackground(false);
+        frame_selectAppView->setStyleSheet(QString::fromUtf8("QFrame{\n"
 "background-color:rgb(51, 51, 51);\n"
 "}\n"
 "QPushButton:hover{\n"
@@ -123,276 +109,170 @@ public:
 "border-style:none;\n"
 "}\n"
 ""));
-        viewSelectFrame->setFrameShape(QFrame::NoFrame);
-        viewSelectFrame->setFrameShadow(QFrame::Plain);
-        viewSelectFrame->setLineWidth(1);
-        verticalLayout = new QVBoxLayout(viewSelectFrame);
+        frame_selectAppView->setFrameShape(QFrame::NoFrame);
+        frame_selectAppView->setFrameShadow(QFrame::Plain);
+        frame_selectAppView->setLineWidth(1);
+        verticalLayout = new QVBoxLayout(frame_selectAppView);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        homeViewButton = new QPushButton(viewSelectFrame);
-        homeViewButton->setObjectName(QString::fromUtf8("homeViewButton"));
-        homeViewButton->setEnabled(true);
+        button_switchToHomeView = new QPushButton(frame_selectAppView);
+        button_switchToHomeView->setObjectName(QString::fromUtf8("button_switchToHomeView"));
+        button_switchToHomeView->setEnabled(true);
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(homeViewButton->sizePolicy().hasHeightForWidth());
-        homeViewButton->setSizePolicy(sizePolicy2);
-        homeViewButton->setMinimumSize(QSize(64, 48));
-        homeViewButton->setMaximumSize(QSize(64, 48));
-        homeViewButton->setBaseSize(QSize(64, 48));
+        sizePolicy2.setHeightForWidth(button_switchToHomeView->sizePolicy().hasHeightForWidth());
+        button_switchToHomeView->setSizePolicy(sizePolicy2);
+        button_switchToHomeView->setMinimumSize(QSize(64, 48));
+        button_switchToHomeView->setMaximumSize(QSize(64, 48));
+        button_switchToHomeView->setBaseSize(QSize(64, 48));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../icons/icons8-home-64.png"), QSize(), QIcon::Normal, QIcon::Off);
-        homeViewButton->setIcon(icon);
-        homeViewButton->setIconSize(QSize(32, 32));
-        homeViewButton->setCheckable(true);
-        homeViewButton->setChecked(true);
-        homeViewButton->setAutoExclusive(true);
-        homeViewButton->setFlat(false);
+        button_switchToHomeView->setIcon(icon);
+        button_switchToHomeView->setIconSize(QSize(32, 32));
+        button_switchToHomeView->setCheckable(true);
+        button_switchToHomeView->setChecked(true);
+        button_switchToHomeView->setAutoExclusive(true);
+        button_switchToHomeView->setFlat(false);
 
-        verticalLayout->addWidget(homeViewButton);
+        verticalLayout->addWidget(button_switchToHomeView);
 
-        stockViewButton = new QPushButton(viewSelectFrame);
-        stockViewButton->setObjectName(QString::fromUtf8("stockViewButton"));
-        stockViewButton->setEnabled(true);
-        sizePolicy2.setHeightForWidth(stockViewButton->sizePolicy().hasHeightForWidth());
-        stockViewButton->setSizePolicy(sizePolicy2);
-        stockViewButton->setMinimumSize(QSize(64, 48));
-        stockViewButton->setMaximumSize(QSize(64, 48));
-        stockViewButton->setBaseSize(QSize(64, 48));
+        button_switchToStockView = new QPushButton(frame_selectAppView);
+        button_switchToStockView->setObjectName(QString::fromUtf8("button_switchToStockView"));
+        button_switchToStockView->setEnabled(true);
+        sizePolicy2.setHeightForWidth(button_switchToStockView->sizePolicy().hasHeightForWidth());
+        button_switchToStockView->setSizePolicy(sizePolicy2);
+        button_switchToStockView->setMinimumSize(QSize(64, 48));
+        button_switchToStockView->setMaximumSize(QSize(64, 48));
+        button_switchToStockView->setBaseSize(QSize(64, 48));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8("../icons/icons8-stocks-64.png"), QSize(), QIcon::Normal, QIcon::Off);
-        stockViewButton->setIcon(icon1);
-        stockViewButton->setIconSize(QSize(32, 32));
-        stockViewButton->setCheckable(true);
-        stockViewButton->setChecked(false);
-        stockViewButton->setAutoExclusive(true);
+        button_switchToStockView->setIcon(icon1);
+        button_switchToStockView->setIconSize(QSize(32, 32));
+        button_switchToStockView->setCheckable(true);
+        button_switchToStockView->setChecked(false);
+        button_switchToStockView->setAutoExclusive(true);
 
-        verticalLayout->addWidget(stockViewButton);
+        verticalLayout->addWidget(button_switchToStockView);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        vspacer1 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout->addItem(verticalSpacer);
+        verticalLayout->addItem(vspacer1);
 
 
-        horizontalLayout->addWidget(viewSelectFrame);
+        horizontalLayout->addWidget(frame_selectAppView);
 
-        stackedWidget = new QStackedWidget(centralwidget);
-        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        stacked_appView = new QStackedWidget(centralwidget);
+        stacked_appView->setObjectName(QString::fromUtf8("stacked_appView"));
         QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(1);
         sizePolicy3.setVerticalStretch(1);
-        sizePolicy3.setHeightForWidth(stackedWidget->sizePolicy().hasHeightForWidth());
-        stackedWidget->setSizePolicy(sizePolicy3);
-        stackedWidget->setStyleSheet(QString::fromUtf8(""));
-        homeView = new QWidget();
-        homeView->setObjectName(QString::fromUtf8("homeView"));
-        homeView->setEnabled(true);
+        sizePolicy3.setHeightForWidth(stacked_appView->sizePolicy().hasHeightForWidth());
+        stacked_appView->setSizePolicy(sizePolicy3);
+        stacked_appView->setStyleSheet(QString::fromUtf8(""));
+        page_homeView = new QWidget();
+        page_homeView->setObjectName(QString::fromUtf8("page_homeView"));
+        page_homeView->setEnabled(true);
         QSizePolicy sizePolicy4(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(homeView->sizePolicy().hasHeightForWidth());
-        homeView->setSizePolicy(sizePolicy4);
-        homeView->setStyleSheet(QString::fromUtf8("background-color: rgb(38, 39, 40);\n"
+        sizePolicy4.setHeightForWidth(page_homeView->sizePolicy().hasHeightForWidth());
+        page_homeView->setSizePolicy(sizePolicy4);
+        page_homeView->setStyleSheet(QString::fromUtf8("background-color: rgb(38, 39, 40);\n"
 "color: rgb(255, 255, 255);"));
-        gridLayout_2 = new QGridLayout(homeView);
+        gridLayout_2 = new QGridLayout(page_homeView);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        textBrowser = new QTextBrowser(homeView);
-        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        textBrowser_homeInfo = new QTextBrowser(page_homeView);
+        textBrowser_homeInfo->setObjectName(QString::fromUtf8("textBrowser_homeInfo"));
         QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(textBrowser->sizePolicy().hasHeightForWidth());
-        textBrowser->setSizePolicy(sizePolicy5);
-        textBrowser->setAutoFillBackground(false);
-        textBrowser->setFrameShape(QFrame::NoFrame);
-        textBrowser->setFrameShadow(QFrame::Plain);
-        textBrowser->setOpenExternalLinks(false);
+        sizePolicy5.setHeightForWidth(textBrowser_homeInfo->sizePolicy().hasHeightForWidth());
+        textBrowser_homeInfo->setSizePolicy(sizePolicy5);
+        textBrowser_homeInfo->setAutoFillBackground(false);
+        textBrowser_homeInfo->setFrameShape(QFrame::NoFrame);
+        textBrowser_homeInfo->setFrameShadow(QFrame::Plain);
+        textBrowser_homeInfo->setOpenExternalLinks(false);
 
-        gridLayout_2->addWidget(textBrowser, 1, 1, 1, 1);
+        gridLayout_2->addWidget(textBrowser_homeInfo, 1, 1, 1, 1);
 
-        formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
-        keyLabel = new QLabel(homeView);
-        keyLabel->setObjectName(QString::fromUtf8("keyLabel"));
-        keyLabel->setAutoFillBackground(false);
+        form_apiKey = new QFormLayout();
+        form_apiKey->setObjectName(QString::fromUtf8("form_apiKey"));
+        label_api = new QLabel(page_homeView);
+        label_api->setObjectName(QString::fromUtf8("label_api"));
+        label_api->setAutoFillBackground(false);
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, keyLabel);
+        form_apiKey->setWidget(0, QFormLayout::LabelRole, label_api);
 
-        keyLineEdit = new QLineEdit(homeView);
-        keyLineEdit->setObjectName(QString::fromUtf8("keyLineEdit"));
-        sizePolicy5.setHeightForWidth(keyLineEdit->sizePolicy().hasHeightForWidth());
-        keyLineEdit->setSizePolicy(sizePolicy5);
+        lineEdit_apiKey = new QLineEdit(page_homeView);
+        lineEdit_apiKey->setObjectName(QString::fromUtf8("lineEdit_apiKey"));
+        sizePolicy5.setHeightForWidth(lineEdit_apiKey->sizePolicy().hasHeightForWidth());
+        lineEdit_apiKey->setSizePolicy(sizePolicy5);
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, keyLineEdit);
+        form_apiKey->setWidget(0, QFormLayout::FieldRole, lineEdit_apiKey);
 
 
-        gridLayout_2->addLayout(formLayout, 2, 1, 1, 1);
+        gridLayout_2->addLayout(form_apiKey, 2, 1, 1, 1);
 
-        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        vspacer2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_2->addItem(verticalSpacer_6, 0, 1, 1, 1);
+        gridLayout_2->addItem(vspacer2, 0, 1, 1, 1);
 
-        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        vspacer3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_2->addItem(verticalSpacer_7, 3, 1, 1, 1);
+        gridLayout_2->addItem(vspacer3, 3, 1, 1, 1);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        hspacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_3, 1, 0, 1, 1);
+        gridLayout_2->addItem(hspacer1, 1, 0, 1, 1);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        hspacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_4, 1, 2, 1, 1);
+        gridLayout_2->addItem(hspacer2, 1, 2, 1, 1);
 
-        stackedWidget->addWidget(homeView);
-        stockView = new QWidget();
-        stockView->setObjectName(QString::fromUtf8("stockView"));
-        stockView->setStyleSheet(QString::fromUtf8("background-color: rgb(25, 25, 25);"));
-        gridLayout_3 = new QGridLayout(stockView);
+        stacked_appView->addWidget(page_homeView);
+        page_stockView = new QWidget();
+        page_stockView->setObjectName(QString::fromUtf8("page_stockView"));
+        page_stockView->setStyleSheet(QString::fromUtf8("background-color: rgb(25, 25, 25);"));
+        gridLayout_3 = new QGridLayout(page_stockView);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        stacked_appView->addWidget(page_stockView);
 
-        gridLayout_3->addItem(horizontalSpacer, 0, 1, 1, 1);
-
-        stockFrame = new QFrame(stockView);
-        stockFrame->setObjectName(QString::fromUtf8("stockFrame"));
-        QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(stockFrame->sizePolicy().hasHeightForWidth());
-        stockFrame->setSizePolicy(sizePolicy6);
-        stockFrame->setMinimumSize(QSize(30, 0));
-        stockFrame->setMaximumSize(QSize(100, 16777215));
-        stockFrame->setStyleSheet(QString::fromUtf8("background-color: rgb(38, 39, 40);\n"
-"border-color: rgb(255, 255, 255);\n"
-"color: rgb(255, 255, 255);"));
-        verticalLayout_2 = new QVBoxLayout(stockFrame);
-        verticalLayout_2->setSpacing(0);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        newStockWidget = new QStackedWidget(stockFrame);
-        newStockWidget->setObjectName(QString::fromUtf8("newStockWidget"));
-        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(newStockWidget->sizePolicy().hasHeightForWidth());
-        newStockWidget->setSizePolicy(sizePolicy7);
-        newStockWidget->setFrameShape(QFrame::NoFrame);
-        newStockWidget->setLineWidth(0);
-        page1 = new QWidget();
-        page1->setObjectName(QString::fromUtf8("page1"));
-        gridLayout = new QGridLayout(page1);
-        gridLayout->setSpacing(0);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        newStockButton = new QPushButton(page1);
-        newStockButton->setObjectName(QString::fromUtf8("newStockButton"));
-        QSizePolicy sizePolicy8(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
-        sizePolicy8.setHeightForWidth(newStockButton->sizePolicy().hasHeightForWidth());
-        newStockButton->setSizePolicy(sizePolicy8);
-        newStockButton->setStyleSheet(QString::fromUtf8("QPushButton:hover{\n"
-"background-color:rgb(81, 81, 81);\n"
-"}\n"
-"QPushButton{\n"
-"border-style:none;\n"
-"}"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8("../icons/icons8-plus-64.png"), QSize(), QIcon::Normal, QIcon::Off);
-        newStockButton->setIcon(icon2);
-        newStockButton->setIconSize(QSize(32, 32));
-
-        gridLayout->addWidget(newStockButton, 0, 0, 1, 1);
-
-        newStockWidget->addWidget(page1);
-        page2 = new QWidget();
-        page2->setObjectName(QString::fromUtf8("page2"));
-        gridLayout_4 = new QGridLayout(page2);
-        gridLayout_4->setSpacing(0);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        stockLineEdit = new QLineEdit(page2);
-        stockLineEdit->setObjectName(QString::fromUtf8("stockLineEdit"));
-        sizePolicy1.setHeightForWidth(stockLineEdit->sizePolicy().hasHeightForWidth());
-        stockLineEdit->setSizePolicy(sizePolicy1);
-        QFont font;
-        font.setPointSize(14);
-        stockLineEdit->setFont(font);
-        stockLineEdit->setStyleSheet(QString::fromUtf8("QLineEdit:hover{\n"
-"background-color:rgb(81, 81, 81);\n"
-"}"));
-
-        gridLayout_4->addWidget(stockLineEdit, 0, 0, 1, 1);
-
-        newStockWidget->addWidget(page2);
-
-        verticalLayout_2->addWidget(newStockWidget, 0, Qt::AlignTop);
-
-        label = new QLabel(stockFrame);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setFrameShape(QFrame::Panel);
-        label->setFrameShadow(QFrame::Raised);
-
-        verticalLayout_2->addWidget(label, 0, Qt::AlignVCenter);
-
-        stockList = new QListWidget(stockFrame);
-        stockList->setObjectName(QString::fromUtf8("stockList"));
-        sizePolicy1.setHeightForWidth(stockList->sizePolicy().hasHeightForWidth());
-        stockList->setSizePolicy(sizePolicy1);
-        stockList->setFrameShape(QFrame::NoFrame);
-        stockList->setFrameShadow(QFrame::Plain);
-        stockList->setLineWidth(0);
-        stockList->setMidLineWidth(0);
-        stockList->setSortingEnabled(true);
-
-        verticalLayout_2->addWidget(stockList);
-
-
-        gridLayout_3->addWidget(stockFrame, 0, 0, 1, 1);
-
-        stackedWidget->addWidget(stockView);
-
-        horizontalLayout->addWidget(stackedWidget);
-
-        spacingView = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(spacingView);
+        horizontalLayout->addWidget(stacked_appView);
 
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setEnabled(true);
-        menubar->setGeometry(QRect(0, 0, 1020, 20));
-        menubar->setAutoFillBackground(false);
-        menubar->setStyleSheet(QString::fromUtf8("background-color: rgb(51, 51, 51);\n"
+        menu_bar = new QMenuBar(MainWindow);
+        menu_bar->setObjectName(QString::fromUtf8("menu_bar"));
+        menu_bar->setEnabled(true);
+        menu_bar->setGeometry(QRect(0, 0, 1020, 20));
+        menu_bar->setAutoFillBackground(false);
+        menu_bar->setStyleSheet(QString::fromUtf8("background-color: rgb(51, 51, 51);\n"
 "color:rgb(255, 255, 255);\n"
 "\n"
 "QMenubar:::QMenu:selected{\n"
 "background:rgb(81, 81, 81);\n"
 "}"));
-        menubar->setDefaultUp(false);
-        menuFile = new QMenu(menubar);
-        menuFile->setObjectName(QString::fromUtf8("menuFile"));
-        menuFile->setStyleSheet(QString::fromUtf8("QMenu::item:selected{\n"
+        menu_bar->setDefaultUp(false);
+        menu_file = new QMenu(menu_bar);
+        menu_file->setObjectName(QString::fromUtf8("menu_file"));
+        menu_file->setStyleSheet(QString::fromUtf8("QMenu::item:selected{\n"
 "background:rgb(81, 81, 81);\n"
 "}"));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        statusbar->setStyleSheet(QString::fromUtf8("background-color: rgb(51, 51, 51);"));
-        MainWindow->setStatusBar(statusbar);
+        MainWindow->setMenuBar(menu_bar);
+        status_bar = new QStatusBar(MainWindow);
+        status_bar->setObjectName(QString::fromUtf8("status_bar"));
+        status_bar->setStyleSheet(QString::fromUtf8("background-color: rgb(51, 51, 51);"));
+        MainWindow->setStatusBar(status_bar);
 
-        menubar->addAction(menuFile->menuAction());
-        menuFile->addAction(actionExit);
+        menu_bar->addAction(menu_file->menuAction());
+        menu_file->addAction(action_exit);
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
-        newStockWidget->setCurrentIndex(1);
+        stacked_appView->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -401,16 +281,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Stocker", nullptr));
-        actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
+        action_exit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
 #if QT_CONFIG(tooltip)
-        homeViewButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Switch to Home View</p></body></html>", nullptr));
+        button_switchToHomeView->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Switch to Home View</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        homeViewButton->setText(QString());
+        button_switchToHomeView->setText(QString());
 #if QT_CONFIG(tooltip)
-        stockViewButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Switch to stock view</p></body></html>", nullptr));
+        button_switchToStockView->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Switch to stock view</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        stockViewButton->setText(QString());
-        textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        button_switchToStockView->setText(QString());
+        textBrowser_homeInfo->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
@@ -419,15 +299,9 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">-------------------------------------</p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt"
                         "-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">A desktop application built with C++ and QT5 for viewing historical stock data pulled from Alpha Vantage</span></p></body></html>", nullptr));
-        keyLabel->setText(QCoreApplication::translate("MainWindow", "Alpha Vantage API Key", nullptr));
-        keyLineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter key...", nullptr));
-#if QT_CONFIG(tooltip)
-        newStockButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Add a new stock</p></body></html>", nullptr));
-#endif // QT_CONFIG(tooltip)
-        newStockButton->setText(QString());
-        stockLineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "Symbol", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Stocks</p></body></html>", nullptr));
-        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
+        label_api->setText(QCoreApplication::translate("MainWindow", "Alpha Vantage API Key", nullptr));
+        lineEdit_apiKey->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter key...", nullptr));
+        menu_file->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };
