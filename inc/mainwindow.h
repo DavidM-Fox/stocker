@@ -1,10 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include "avapi.h"
 #include <QApplication>
 #include <QDebug>
 #include <QListWidgetItem>
 #include <QMainWindow>
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,9 +19,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void on_exit();
+private:
+    Ui::MainWindow *ui;
+    void setupMainWindow();
 
+private slots:
     void on_homeViewButton();
     void on_stockViewButton();
     void on_newStockButton();
@@ -30,10 +32,10 @@ private slots:
     void onStockListItemClicked(QListWidgetItem *item);
 
 private:
-    Ui::MainWindow *ui;
-
-    void configure_buttons();
-    void configure_connections();
+    static QString icon_dir;
+    static QIcon icon_homeView;
+    static QIcon icon_stockView;
+    static QIcon icon_newSymbol;
 };
 
 #endif // MAINWINDOW_H

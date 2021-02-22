@@ -1,42 +1,34 @@
 #ifndef QCANDLESTICKCHART_H
 #define QCANDLESTICKCHART_H
-#include <QtWidgets>
-#include <QPainter>
+#include "avapi.h"
 #include <QtCharts>
-#include <QtCharts/QCandlestickSeries>
-#include <QChartView>
-#include <QLineSeries>
 #include <vector>
 
-class QCandlestickChart : public QWidget
-{
+class QCandlestickChartView : public QChartView {
     Q_OBJECT
 
-    public:
-        explicit QCandlestickChart(
-            std::string data_file,
-            std::string title_series,
-            std::string title_chart,
-            QWidget *parent = 0);
+public:
+    explicit QCandlestickChartView(QWidget *parent = 0);
+    ~QCandlestickChartView();
 
-        ~QCandlestickChart();
-        
-        QChartView *get_ChartView();
-        
-        QString m_data_file;
-        QString m_title_series;
-        QString m_title_chart;
+    void addAvapiSeries(avapi::time_series &a_series, const QString &title,
+                        const avapi::function &func);
 
-    private:
+    void setChartTitle(const QString &title);
 
-        QCandlestickSeries *m_stock_series;
-        QChart *m_chart;
-        QChartView *m_chart_view;
-        QStringList m_categories;
+    void setViewDefaults();
+    void setChartDefaults();
 
-        void create_CandlestickSeries();
-        void create_ChartView();
-        int cur_width;
+    void setDefaultChartAxes();
+    void setDefaultChartLegend();
+
+private slots:
+    void sltTooltip(bool status, QCandlestickSet *set);
+
+private:
+    static std::vector<QString> m_functions;
+    QCandlestickSeries *m_series;
+    QStringList m_categories;
+    QLabel *m_tooltip = nullptr;
 };
-
 #endif // QCANDLESTICKCHART_H

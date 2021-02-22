@@ -16,15 +16,24 @@ set(Qt5Charts_DIR "C:\\Qt\\5.15.2\\msvc2019\\lib\\cmake\\Qt5Charts\\")
 find_package(Qt5 COMPONENTS Core Gui Widgets Charts REQUIRED)
 find_package(CURL CONFIG REQUIRED)
 
+set(PROJ_INC "inc")
+set(PROJ_SRC "src")
+
+include_directories(${PROJ_INC})
+
 set(PROJECT_SOURCES
-        src/main.cpp
-        src/mainwindow.cpp
-        src/QCandlestickChart.cpp
-        inc/mainwindow.h
-        inc/stocker_api.hpp
-        inc/QCandlestickChart.h
-        inc/mainwindow.ui
+        ${PROJ_SRC}/main.cpp
+        ${PROJ_SRC}/mainwindow.cpp
+        ${PROJ_SRC}/avapi.cpp
+        ${PROJ_SRC}/QCandlestickChart.cpp
+
+        ${PROJ_INC}/mainwindow_ui.h
+        ${PROJ_INC}/mainwindow.h
+        ${PROJ_INC}/rapidcsv.h
+        ${PROJ_INC}/avapi.h
+        ${PROJ_INC}/QCandlestickChart.h
 )
+
 
 add_executable(stocker ${PROJECT_SOURCES})
 target_link_libraries(stocker PRIVATE CURL::libcurl Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Charts)
