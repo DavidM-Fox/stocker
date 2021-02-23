@@ -1,10 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include "QCandlestickChart.h"
 #include "avapi.h"
 #include <QApplication>
 #include <QDebug>
-#include <QListWidgetItem>
 #include <QMainWindow>
+#include <QWidget>
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,17 +32,18 @@ private:
 private slots:
     void on_switchToHomeViewButton();
     void on_switchToStockViewButton();
-
-    // void on_newStockButton();
-    // void on_newStockEdit();
-    // void toUpper(const QString &text);
-    // void onStockListItemClicked(QListWidgetItem *item);
+    void on_newApiKey();
+    void on_newSymbol();
+    void toUpper(const QString &text);
 
 private:
     QString icon_dir;
     QIcon icon_homeView;
     QIcon icon_stockView;
     QIcon icon_newSymbol;
+
+    std::string m_apiKey;
+    QCandlestickChartView *m_chartView = nullptr;
 };
 
 #endif // MAINWINDOW_H

@@ -46,16 +46,45 @@ public:
     QStackedWidget *stacked_appView;
     QWidget *page_homeView;
     QGridLayout *gridLayout_2;
+    QSpacerItem *vspacer2;
     QTextBrowser *textBrowser_homeInfo;
+    QSpacerItem *hspacer2;
+    QSpacerItem *hspacer1;
     QFormLayout *form_apiKey;
     QLabel *label_api;
     QLineEdit *lineEdit_apiKey;
-    QSpacerItem *vspacer2;
     QSpacerItem *vspacer3;
-    QSpacerItem *hspacer1;
-    QSpacerItem *hspacer2;
     QWidget *page_stockView;
     QGridLayout *gridLayout_3;
+    QFrame *frame_stockDataView;
+    QVBoxLayout *verticalLayout_3;
+    QLineEdit *lineEdit_symbol;
+    QFrame *frame_stockInfo;
+    QGridLayout *gridLayout;
+    QLabel *label_highField;
+    QLabel *label_openField;
+    QLabel *label_changePercent;
+    QLabel *label_changeField;
+    QLabel *label_previousCloseField;
+    QLabel *label_previousClose;
+    QLabel *label_change;
+    QLabel *label_open;
+    QLabel *label_volume;
+    QLabel *label_high;
+    QLabel *label_latestDayField;
+    QLabel *label_symbol;
+    QLabel *label_changePercentField;
+    QLabel *label_symbolField;
+    QSpacerItem *verticalSpacer;
+    QLabel *label_low;
+    QLabel *label_globalQuoteHeader;
+    QLabel *label_priceField;
+    QLabel *label_price;
+    QLabel *label_latestDay;
+    QLabel *label_lowField;
+    QLabel *label_volumeField;
+    QLabel *label;
+    QVBoxLayout *layout_chartView;
     QMenuBar *menu_bar;
     QMenu *menu_file;
     QStatusBar *status_bar;
@@ -65,7 +94,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->setEnabled(true);
-        MainWindow->resize(1020, 715);
+        MainWindow->resize(986, 720);
         MainWindow->setMinimumSize(QSize(600, 600));
         MainWindow->setCursor(QCursor(Qt::ArrowCursor));
         MainWindow->setAutoFillBackground(false);
@@ -184,6 +213,10 @@ public:
         gridLayout_2 = new QGridLayout(page_homeView);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        vspacer2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_2->addItem(vspacer2, 0, 1, 1, 1);
+
         textBrowser_homeInfo = new QTextBrowser(page_homeView);
         textBrowser_homeInfo->setObjectName(QString::fromUtf8("textBrowser_homeInfo"));
         QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -197,6 +230,14 @@ public:
         textBrowser_homeInfo->setOpenExternalLinks(false);
 
         gridLayout_2->addWidget(textBrowser_homeInfo, 1, 1, 1, 1);
+
+        hspacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(hspacer2, 1, 2, 1, 1);
+
+        hspacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(hspacer1, 1, 0, 1, 1);
 
         form_apiKey = new QFormLayout();
         form_apiKey->setObjectName(QString::fromUtf8("form_apiKey"));
@@ -216,21 +257,9 @@ public:
 
         gridLayout_2->addLayout(form_apiKey, 2, 1, 1, 1);
 
-        vspacer2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_2->addItem(vspacer2, 0, 1, 1, 1);
-
         vspacer3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_2->addItem(vspacer3, 3, 1, 1, 1);
-
-        hspacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(hspacer1, 1, 0, 1, 1);
-
-        hspacer2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(hspacer2, 1, 2, 1, 1);
 
         stacked_appView->addWidget(page_homeView);
         page_stockView = new QWidget();
@@ -239,6 +268,198 @@ public:
         gridLayout_3 = new QGridLayout(page_stockView);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
+        frame_stockDataView = new QFrame(page_stockView);
+        frame_stockDataView->setObjectName(QString::fromUtf8("frame_stockDataView"));
+        QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(frame_stockDataView->sizePolicy().hasHeightForWidth());
+        frame_stockDataView->setSizePolicy(sizePolicy6);
+        frame_stockDataView->setMinimumSize(QSize(200, 0));
+        frame_stockDataView->setMaximumSize(QSize(200, 16777215));
+        frame_stockDataView->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));
+        frame_stockDataView->setFrameShape(QFrame::Box);
+        frame_stockDataView->setFrameShadow(QFrame::Plain);
+        frame_stockDataView->setLineWidth(1);
+        verticalLayout_3 = new QVBoxLayout(frame_stockDataView);
+        verticalLayout_3->setSpacing(0);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        lineEdit_symbol = new QLineEdit(frame_stockDataView);
+        lineEdit_symbol->setObjectName(QString::fromUtf8("lineEdit_symbol"));
+        QFont font;
+        font.setPointSize(12);
+        lineEdit_symbol->setFont(font);
+
+        verticalLayout_3->addWidget(lineEdit_symbol, 0, Qt::AlignTop);
+
+        frame_stockInfo = new QFrame(frame_stockDataView);
+        frame_stockInfo->setObjectName(QString::fromUtf8("frame_stockInfo"));
+        frame_stockInfo->setEnabled(true);
+        frame_stockInfo->setFrameShape(QFrame::NoFrame);
+        frame_stockInfo->setFrameShadow(QFrame::Plain);
+        frame_stockInfo->setLineWidth(1);
+        gridLayout = new QGridLayout(frame_stockInfo);
+        gridLayout->setSpacing(1);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, -1);
+        label_highField = new QLabel(frame_stockInfo);
+        label_highField->setObjectName(QString::fromUtf8("label_highField"));
+        label_highField->setFrameShape(QFrame::Panel);
+        label_highField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_highField, 4, 1, 1, 1);
+
+        label_openField = new QLabel(frame_stockInfo);
+        label_openField->setObjectName(QString::fromUtf8("label_openField"));
+        label_openField->setFrameShape(QFrame::Panel);
+        label_openField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_openField, 3, 1, 1, 1);
+
+        label_changePercent = new QLabel(frame_stockInfo);
+        label_changePercent->setObjectName(QString::fromUtf8("label_changePercent"));
+
+        gridLayout->addWidget(label_changePercent, 10, 0, 1, 1);
+
+        label_changeField = new QLabel(frame_stockInfo);
+        label_changeField->setObjectName(QString::fromUtf8("label_changeField"));
+        label_changeField->setFrameShape(QFrame::Panel);
+        label_changeField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_changeField, 9, 1, 1, 1);
+
+        label_previousCloseField = new QLabel(frame_stockInfo);
+        label_previousCloseField->setObjectName(QString::fromUtf8("label_previousCloseField"));
+        label_previousCloseField->setFrameShape(QFrame::Panel);
+        label_previousCloseField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_previousCloseField, 8, 1, 1, 1);
+
+        label_previousClose = new QLabel(frame_stockInfo);
+        label_previousClose->setObjectName(QString::fromUtf8("label_previousClose"));
+
+        gridLayout->addWidget(label_previousClose, 8, 0, 1, 1);
+
+        label_change = new QLabel(frame_stockInfo);
+        label_change->setObjectName(QString::fromUtf8("label_change"));
+
+        gridLayout->addWidget(label_change, 9, 0, 1, 1);
+
+        label_open = new QLabel(frame_stockInfo);
+        label_open->setObjectName(QString::fromUtf8("label_open"));
+
+        gridLayout->addWidget(label_open, 3, 0, 1, 1);
+
+        label_volume = new QLabel(frame_stockInfo);
+        label_volume->setObjectName(QString::fromUtf8("label_volume"));
+
+        gridLayout->addWidget(label_volume, 7, 0, 1, 1);
+
+        label_high = new QLabel(frame_stockInfo);
+        label_high->setObjectName(QString::fromUtf8("label_high"));
+
+        gridLayout->addWidget(label_high, 4, 0, 1, 1);
+
+        label_latestDayField = new QLabel(frame_stockInfo);
+        label_latestDayField->setObjectName(QString::fromUtf8("label_latestDayField"));
+        label_latestDayField->setFrameShape(QFrame::Panel);
+        label_latestDayField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_latestDayField, 2, 1, 1, 1);
+
+        label_symbol = new QLabel(frame_stockInfo);
+        label_symbol->setObjectName(QString::fromUtf8("label_symbol"));
+
+        gridLayout->addWidget(label_symbol, 1, 0, 1, 1);
+
+        label_changePercentField = new QLabel(frame_stockInfo);
+        label_changePercentField->setObjectName(QString::fromUtf8("label_changePercentField"));
+        label_changePercentField->setFrameShape(QFrame::Panel);
+        label_changePercentField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_changePercentField, 10, 1, 1, 1);
+
+        label_symbolField = new QLabel(frame_stockInfo);
+        label_symbolField->setObjectName(QString::fromUtf8("label_symbolField"));
+        label_symbolField->setFrameShape(QFrame::Panel);
+        label_symbolField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_symbolField, 1, 1, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 12, 0, 1, 2);
+
+        label_low = new QLabel(frame_stockInfo);
+        label_low->setObjectName(QString::fromUtf8("label_low"));
+
+        gridLayout->addWidget(label_low, 5, 0, 1, 1);
+
+        label_globalQuoteHeader = new QLabel(frame_stockInfo);
+        label_globalQuoteHeader->setObjectName(QString::fromUtf8("label_globalQuoteHeader"));
+        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(label_globalQuoteHeader->sizePolicy().hasHeightForWidth());
+        label_globalQuoteHeader->setSizePolicy(sizePolicy7);
+        label_globalQuoteHeader->setFrameShape(QFrame::Panel);
+        label_globalQuoteHeader->setFrameShadow(QFrame::Raised);
+        label_globalQuoteHeader->setLineWidth(2);
+        label_globalQuoteHeader->setMidLineWidth(0);
+
+        gridLayout->addWidget(label_globalQuoteHeader, 0, 0, 1, 2, Qt::AlignTop);
+
+        label_priceField = new QLabel(frame_stockInfo);
+        label_priceField->setObjectName(QString::fromUtf8("label_priceField"));
+        label_priceField->setFrameShape(QFrame::Panel);
+        label_priceField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_priceField, 6, 1, 1, 1);
+
+        label_price = new QLabel(frame_stockInfo);
+        label_price->setObjectName(QString::fromUtf8("label_price"));
+
+        gridLayout->addWidget(label_price, 6, 0, 1, 1);
+
+        label_latestDay = new QLabel(frame_stockInfo);
+        label_latestDay->setObjectName(QString::fromUtf8("label_latestDay"));
+
+        gridLayout->addWidget(label_latestDay, 2, 0, 1, 1);
+
+        label_lowField = new QLabel(frame_stockInfo);
+        label_lowField->setObjectName(QString::fromUtf8("label_lowField"));
+        label_lowField->setFrameShape(QFrame::Panel);
+        label_lowField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_lowField, 5, 1, 1, 1);
+
+        label_volumeField = new QLabel(frame_stockInfo);
+        label_volumeField->setObjectName(QString::fromUtf8("label_volumeField"));
+        label_volumeField->setFrameShape(QFrame::Panel);
+        label_volumeField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_volumeField, 7, 1, 1, 1);
+
+        label = new QLabel(frame_stockInfo);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setFrameShape(QFrame::Panel);
+        label->setFrameShadow(QFrame::Raised);
+        label->setLineWidth(2);
+
+        gridLayout->addWidget(label, 11, 0, 1, 2);
+
+
+        verticalLayout_3->addWidget(frame_stockInfo);
+
+
+        gridLayout_3->addWidget(frame_stockDataView, 0, 0, 1, 1, Qt::AlignLeft);
+
+        layout_chartView = new QVBoxLayout();
+        layout_chartView->setObjectName(QString::fromUtf8("layout_chartView"));
+
+        gridLayout_3->addLayout(layout_chartView, 0, 1, 1, 1);
+
         stacked_appView->addWidget(page_stockView);
 
         horizontalLayout->addWidget(stacked_appView);
@@ -247,7 +468,7 @@ public:
         menu_bar = new QMenuBar(MainWindow);
         menu_bar->setObjectName(QString::fromUtf8("menu_bar"));
         menu_bar->setEnabled(true);
-        menu_bar->setGeometry(QRect(0, 0, 1020, 20));
+        menu_bar->setGeometry(QRect(0, 0, 986, 20));
         menu_bar->setAutoFillBackground(false);
         menu_bar->setStyleSheet(QString::fromUtf8("background-color: rgb(51, 51, 51);\n"
 "color:rgb(255, 255, 255);\n"
@@ -301,6 +522,29 @@ public:
                         "-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">A desktop application built with C++ and QT5 for viewing historical stock data pulled from Alpha Vantage</span></p></body></html>", nullptr));
         label_api->setText(QCoreApplication::translate("MainWindow", "Alpha Vantage API Key", nullptr));
         lineEdit_apiKey->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter key...", nullptr));
+        lineEdit_symbol->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter Symbol...", nullptr));
+        label_highField->setText(QString());
+        label_openField->setText(QString());
+        label_changePercent->setText(QCoreApplication::translate("MainWindow", " Change %:", nullptr));
+        label_changeField->setText(QString());
+        label_previousCloseField->setText(QString());
+        label_previousClose->setText(QCoreApplication::translate("MainWindow", " Previous Close:", nullptr));
+        label_change->setText(QCoreApplication::translate("MainWindow", " Change:", nullptr));
+        label_open->setText(QCoreApplication::translate("MainWindow", " Open:", nullptr));
+        label_volume->setText(QCoreApplication::translate("MainWindow", " Volume:", nullptr));
+        label_high->setText(QCoreApplication::translate("MainWindow", " High:", nullptr));
+        label_latestDayField->setText(QString());
+        label_symbol->setText(QCoreApplication::translate("MainWindow", " Symbol:", nullptr));
+        label_changePercentField->setText(QString());
+        label_symbolField->setText(QString());
+        label_low->setText(QCoreApplication::translate("MainWindow", " Low:", nullptr));
+        label_globalQuoteHeader->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Global Quote</p></body></html>", nullptr));
+        label_priceField->setText(QString());
+        label_price->setText(QCoreApplication::translate("MainWindow", " Price:", nullptr));
+        label_latestDay->setText(QCoreApplication::translate("MainWindow", " Latest Day:", nullptr));
+        label_lowField->setText(QString());
+        label_volumeField->setText(QString());
+        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Chart Options</p></body></html>", nullptr));
         menu_file->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
