@@ -36,6 +36,10 @@ private slots:
     void on_newSymbol();
     void toUpper(const QString &text);
 
+    void setSeriesType(const int &i);
+    void setCandleCount(const int &i);
+    void on_updateChart();
+
 private:
     QString icon_dir;
     QIcon icon_homeView;
@@ -44,6 +48,16 @@ private:
 
     std::string m_apiKey;
     QCandlestickChartView *m_chartView = nullptr;
+
+    QString m_seriesTitle;
+    avapi::function m_seriesType;
+    std::string m_intradayInterval;
+    size_t m_candleCount;
+
+    static std::vector<QString> m_seriesTitleVect;
+    static std::vector<avapi::function> m_seriesTypeVect;
+    static std::vector<std::string> m_intradayIntervalVect;
+    static std::vector<size_t> m_candleCountVect;
 };
 
 #endif // MAINWINDOW_H

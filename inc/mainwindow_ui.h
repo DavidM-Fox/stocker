@@ -13,6 +13,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
@@ -61,29 +62,34 @@ public:
     QLineEdit *lineEdit_symbol;
     QFrame *frame_stockInfo;
     QGridLayout *gridLayout;
-    QLabel *label_highField;
-    QLabel *label_openField;
-    QLabel *label_changePercent;
-    QLabel *label_changeField;
     QLabel *label_previousCloseField;
+    QLabel *label_chartOptions;
     QLabel *label_previousClose;
-    QLabel *label_change;
-    QLabel *label_open;
-    QLabel *label_volume;
-    QLabel *label_high;
-    QLabel *label_latestDayField;
-    QLabel *label_symbol;
-    QLabel *label_changePercentField;
+    QComboBox *comboBox_seriesType;
     QLabel *label_symbolField;
-    QSpacerItem *verticalSpacer;
     QLabel *label_low;
-    QLabel *label_globalQuoteHeader;
+    QLabel *label_openField;
+    QLabel *label_lowField;
+    QLabel *label_volume;
+    QLabel *label_volumeField;
+    QLabel *label_latestDayField;
+    QLabel *label_changePercentField;
+    QLabel *label_symbol;
+    QLabel *label_candleCount;
+    QComboBox *comboBox_candleCount;
+    QLabel *label_latestDay;
+    QLabel *label_changeField;
+    QLabel *label_open;
+    QLabel *label_high;
+    QLabel *label_changePercent;
+    QLabel *label_change;
     QLabel *label_priceField;
     QLabel *label_price;
-    QLabel *label_latestDay;
-    QLabel *label_lowField;
-    QLabel *label_volumeField;
-    QLabel *label;
+    QLabel *label_seriesType;
+    QLabel *label_highField;
+    QSpacerItem *verticalSpacer;
+    QLabel *label_globalQuoteHeader;
+    QPushButton *button_updateChart;
     QVBoxLayout *layout_chartView;
     QMenuBar *menu_bar;
     QMenu *menu_file;
@@ -303,32 +309,6 @@ public:
         gridLayout->setSpacing(1);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, -1);
-        label_highField = new QLabel(frame_stockInfo);
-        label_highField->setObjectName(QString::fromUtf8("label_highField"));
-        label_highField->setFrameShape(QFrame::Panel);
-        label_highField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_highField, 4, 1, 1, 1);
-
-        label_openField = new QLabel(frame_stockInfo);
-        label_openField->setObjectName(QString::fromUtf8("label_openField"));
-        label_openField->setFrameShape(QFrame::Panel);
-        label_openField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_openField, 3, 1, 1, 1);
-
-        label_changePercent = new QLabel(frame_stockInfo);
-        label_changePercent->setObjectName(QString::fromUtf8("label_changePercent"));
-
-        gridLayout->addWidget(label_changePercent, 10, 0, 1, 1);
-
-        label_changeField = new QLabel(frame_stockInfo);
-        label_changeField->setObjectName(QString::fromUtf8("label_changeField"));
-        label_changeField->setFrameShape(QFrame::Panel);
-        label_changeField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_changeField, 9, 1, 1, 1);
-
         label_previousCloseField = new QLabel(frame_stockInfo);
         label_previousCloseField->setObjectName(QString::fromUtf8("label_previousCloseField"));
         label_previousCloseField->setFrameShape(QFrame::Panel);
@@ -336,49 +316,28 @@ public:
 
         gridLayout->addWidget(label_previousCloseField, 8, 1, 1, 1);
 
+        label_chartOptions = new QLabel(frame_stockInfo);
+        label_chartOptions->setObjectName(QString::fromUtf8("label_chartOptions"));
+        label_chartOptions->setFrameShape(QFrame::Panel);
+        label_chartOptions->setFrameShadow(QFrame::Raised);
+        label_chartOptions->setLineWidth(2);
+
+        gridLayout->addWidget(label_chartOptions, 11, 0, 1, 2);
+
         label_previousClose = new QLabel(frame_stockInfo);
         label_previousClose->setObjectName(QString::fromUtf8("label_previousClose"));
 
         gridLayout->addWidget(label_previousClose, 8, 0, 1, 1);
 
-        label_change = new QLabel(frame_stockInfo);
-        label_change->setObjectName(QString::fromUtf8("label_change"));
+        comboBox_seriesType = new QComboBox(frame_stockInfo);
+        comboBox_seriesType->addItem(QString());
+        comboBox_seriesType->addItem(QString());
+        comboBox_seriesType->addItem(QString());
+        comboBox_seriesType->addItem(QString());
+        comboBox_seriesType->addItem(QString());
+        comboBox_seriesType->setObjectName(QString::fromUtf8("comboBox_seriesType"));
 
-        gridLayout->addWidget(label_change, 9, 0, 1, 1);
-
-        label_open = new QLabel(frame_stockInfo);
-        label_open->setObjectName(QString::fromUtf8("label_open"));
-
-        gridLayout->addWidget(label_open, 3, 0, 1, 1);
-
-        label_volume = new QLabel(frame_stockInfo);
-        label_volume->setObjectName(QString::fromUtf8("label_volume"));
-
-        gridLayout->addWidget(label_volume, 7, 0, 1, 1);
-
-        label_high = new QLabel(frame_stockInfo);
-        label_high->setObjectName(QString::fromUtf8("label_high"));
-
-        gridLayout->addWidget(label_high, 4, 0, 1, 1);
-
-        label_latestDayField = new QLabel(frame_stockInfo);
-        label_latestDayField->setObjectName(QString::fromUtf8("label_latestDayField"));
-        label_latestDayField->setFrameShape(QFrame::Panel);
-        label_latestDayField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_latestDayField, 2, 1, 1, 1);
-
-        label_symbol = new QLabel(frame_stockInfo);
-        label_symbol->setObjectName(QString::fromUtf8("label_symbol"));
-
-        gridLayout->addWidget(label_symbol, 1, 0, 1, 1);
-
-        label_changePercentField = new QLabel(frame_stockInfo);
-        label_changePercentField->setObjectName(QString::fromUtf8("label_changePercentField"));
-        label_changePercentField->setFrameShape(QFrame::Panel);
-        label_changePercentField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_changePercentField, 10, 1, 1, 1);
+        gridLayout->addWidget(comboBox_seriesType, 12, 1, 1, 1);
 
         label_symbolField = new QLabel(frame_stockInfo);
         label_symbolField->setObjectName(QString::fromUtf8("label_symbolField"));
@@ -387,14 +346,130 @@ public:
 
         gridLayout->addWidget(label_symbolField, 1, 1, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 12, 0, 1, 2);
-
         label_low = new QLabel(frame_stockInfo);
         label_low->setObjectName(QString::fromUtf8("label_low"));
 
         gridLayout->addWidget(label_low, 5, 0, 1, 1);
+
+        label_openField = new QLabel(frame_stockInfo);
+        label_openField->setObjectName(QString::fromUtf8("label_openField"));
+        label_openField->setFrameShape(QFrame::Panel);
+        label_openField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_openField, 3, 1, 1, 1);
+
+        label_lowField = new QLabel(frame_stockInfo);
+        label_lowField->setObjectName(QString::fromUtf8("label_lowField"));
+        label_lowField->setFrameShape(QFrame::Panel);
+        label_lowField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_lowField, 5, 1, 1, 1);
+
+        label_volume = new QLabel(frame_stockInfo);
+        label_volume->setObjectName(QString::fromUtf8("label_volume"));
+
+        gridLayout->addWidget(label_volume, 7, 0, 1, 1);
+
+        label_volumeField = new QLabel(frame_stockInfo);
+        label_volumeField->setObjectName(QString::fromUtf8("label_volumeField"));
+        label_volumeField->setFrameShape(QFrame::Panel);
+        label_volumeField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_volumeField, 7, 1, 1, 1);
+
+        label_latestDayField = new QLabel(frame_stockInfo);
+        label_latestDayField->setObjectName(QString::fromUtf8("label_latestDayField"));
+        label_latestDayField->setFrameShape(QFrame::Panel);
+        label_latestDayField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_latestDayField, 2, 1, 1, 1);
+
+        label_changePercentField = new QLabel(frame_stockInfo);
+        label_changePercentField->setObjectName(QString::fromUtf8("label_changePercentField"));
+        label_changePercentField->setFrameShape(QFrame::Panel);
+        label_changePercentField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_changePercentField, 10, 1, 1, 1);
+
+        label_symbol = new QLabel(frame_stockInfo);
+        label_symbol->setObjectName(QString::fromUtf8("label_symbol"));
+
+        gridLayout->addWidget(label_symbol, 1, 0, 1, 1);
+
+        label_candleCount = new QLabel(frame_stockInfo);
+        label_candleCount->setObjectName(QString::fromUtf8("label_candleCount"));
+
+        gridLayout->addWidget(label_candleCount, 13, 0, 1, 1);
+
+        comboBox_candleCount = new QComboBox(frame_stockInfo);
+        comboBox_candleCount->addItem(QString());
+        comboBox_candleCount->addItem(QString());
+        comboBox_candleCount->addItem(QString());
+        comboBox_candleCount->addItem(QString());
+        comboBox_candleCount->addItem(QString());
+        comboBox_candleCount->setObjectName(QString::fromUtf8("comboBox_candleCount"));
+
+        gridLayout->addWidget(comboBox_candleCount, 13, 1, 1, 1);
+
+        label_latestDay = new QLabel(frame_stockInfo);
+        label_latestDay->setObjectName(QString::fromUtf8("label_latestDay"));
+
+        gridLayout->addWidget(label_latestDay, 2, 0, 1, 1);
+
+        label_changeField = new QLabel(frame_stockInfo);
+        label_changeField->setObjectName(QString::fromUtf8("label_changeField"));
+        label_changeField->setFrameShape(QFrame::Panel);
+        label_changeField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_changeField, 9, 1, 1, 1);
+
+        label_open = new QLabel(frame_stockInfo);
+        label_open->setObjectName(QString::fromUtf8("label_open"));
+
+        gridLayout->addWidget(label_open, 3, 0, 1, 1);
+
+        label_high = new QLabel(frame_stockInfo);
+        label_high->setObjectName(QString::fromUtf8("label_high"));
+
+        gridLayout->addWidget(label_high, 4, 0, 1, 1);
+
+        label_changePercent = new QLabel(frame_stockInfo);
+        label_changePercent->setObjectName(QString::fromUtf8("label_changePercent"));
+
+        gridLayout->addWidget(label_changePercent, 10, 0, 1, 1);
+
+        label_change = new QLabel(frame_stockInfo);
+        label_change->setObjectName(QString::fromUtf8("label_change"));
+
+        gridLayout->addWidget(label_change, 9, 0, 1, 1);
+
+        label_priceField = new QLabel(frame_stockInfo);
+        label_priceField->setObjectName(QString::fromUtf8("label_priceField"));
+        label_priceField->setFrameShape(QFrame::Panel);
+        label_priceField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_priceField, 6, 1, 1, 1);
+
+        label_price = new QLabel(frame_stockInfo);
+        label_price->setObjectName(QString::fromUtf8("label_price"));
+
+        gridLayout->addWidget(label_price, 6, 0, 1, 1);
+
+        label_seriesType = new QLabel(frame_stockInfo);
+        label_seriesType->setObjectName(QString::fromUtf8("label_seriesType"));
+
+        gridLayout->addWidget(label_seriesType, 12, 0, 1, 1);
+
+        label_highField = new QLabel(frame_stockInfo);
+        label_highField->setObjectName(QString::fromUtf8("label_highField"));
+        label_highField->setFrameShape(QFrame::Panel);
+        label_highField->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(label_highField, 4, 1, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 15, 0, 1, 2);
 
         label_globalQuoteHeader = new QLabel(frame_stockInfo);
         label_globalQuoteHeader->setObjectName(QString::fromUtf8("label_globalQuoteHeader"));
@@ -410,44 +485,10 @@ public:
 
         gridLayout->addWidget(label_globalQuoteHeader, 0, 0, 1, 2, Qt::AlignTop);
 
-        label_priceField = new QLabel(frame_stockInfo);
-        label_priceField->setObjectName(QString::fromUtf8("label_priceField"));
-        label_priceField->setFrameShape(QFrame::Panel);
-        label_priceField->setFrameShadow(QFrame::Sunken);
+        button_updateChart = new QPushButton(frame_stockInfo);
+        button_updateChart->setObjectName(QString::fromUtf8("button_updateChart"));
 
-        gridLayout->addWidget(label_priceField, 6, 1, 1, 1);
-
-        label_price = new QLabel(frame_stockInfo);
-        label_price->setObjectName(QString::fromUtf8("label_price"));
-
-        gridLayout->addWidget(label_price, 6, 0, 1, 1);
-
-        label_latestDay = new QLabel(frame_stockInfo);
-        label_latestDay->setObjectName(QString::fromUtf8("label_latestDay"));
-
-        gridLayout->addWidget(label_latestDay, 2, 0, 1, 1);
-
-        label_lowField = new QLabel(frame_stockInfo);
-        label_lowField->setObjectName(QString::fromUtf8("label_lowField"));
-        label_lowField->setFrameShape(QFrame::Panel);
-        label_lowField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_lowField, 5, 1, 1, 1);
-
-        label_volumeField = new QLabel(frame_stockInfo);
-        label_volumeField->setObjectName(QString::fromUtf8("label_volumeField"));
-        label_volumeField->setFrameShape(QFrame::Panel);
-        label_volumeField->setFrameShadow(QFrame::Sunken);
-
-        gridLayout->addWidget(label_volumeField, 7, 1, 1, 1);
-
-        label = new QLabel(frame_stockInfo);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setFrameShape(QFrame::Panel);
-        label->setFrameShadow(QFrame::Raised);
-        label->setLineWidth(2);
-
-        gridLayout->addWidget(label, 11, 0, 1, 2);
+        gridLayout->addWidget(button_updateChart, 14, 0, 1, 2, Qt::AlignHCenter);
 
 
         verticalLayout_3->addWidget(frame_stockInfo);
@@ -523,28 +564,43 @@ public:
         label_api->setText(QCoreApplication::translate("MainWindow", "Alpha Vantage API Key", nullptr));
         lineEdit_apiKey->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter key...", nullptr));
         lineEdit_symbol->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter Symbol...", nullptr));
-        label_highField->setText(QString());
-        label_openField->setText(QString());
-        label_changePercent->setText(QCoreApplication::translate("MainWindow", " Change %:", nullptr));
-        label_changeField->setText(QString());
         label_previousCloseField->setText(QString());
+        label_chartOptions->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Chart Options</p></body></html>", nullptr));
         label_previousClose->setText(QCoreApplication::translate("MainWindow", " Previous Close:", nullptr));
-        label_change->setText(QCoreApplication::translate("MainWindow", " Change:", nullptr));
-        label_open->setText(QCoreApplication::translate("MainWindow", " Open:", nullptr));
-        label_volume->setText(QCoreApplication::translate("MainWindow", " Volume:", nullptr));
-        label_high->setText(QCoreApplication::translate("MainWindow", " High:", nullptr));
-        label_latestDayField->setText(QString());
-        label_symbol->setText(QCoreApplication::translate("MainWindow", " Symbol:", nullptr));
-        label_changePercentField->setText(QString());
+        comboBox_seriesType->setItemText(0, QCoreApplication::translate("MainWindow", "Intraday - 15min", nullptr));
+        comboBox_seriesType->setItemText(1, QCoreApplication::translate("MainWindow", "Intraday - 30min", nullptr));
+        comboBox_seriesType->setItemText(2, QCoreApplication::translate("MainWindow", "Daily", nullptr));
+        comboBox_seriesType->setItemText(3, QCoreApplication::translate("MainWindow", "Weekly", nullptr));
+        comboBox_seriesType->setItemText(4, QCoreApplication::translate("MainWindow", "Monthly", nullptr));
+
         label_symbolField->setText(QString());
         label_low->setText(QCoreApplication::translate("MainWindow", " Low:", nullptr));
-        label_globalQuoteHeader->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Global Quote</p></body></html>", nullptr));
+        label_openField->setText(QString());
+        label_lowField->setText(QString());
+        label_volume->setText(QCoreApplication::translate("MainWindow", " Volume:", nullptr));
+        label_volumeField->setText(QString());
+        label_latestDayField->setText(QString());
+        label_changePercentField->setText(QString());
+        label_symbol->setText(QCoreApplication::translate("MainWindow", " Symbol:", nullptr));
+        label_candleCount->setText(QCoreApplication::translate("MainWindow", "Candle Count:", nullptr));
+        comboBox_candleCount->setItemText(0, QCoreApplication::translate("MainWindow", "10", nullptr));
+        comboBox_candleCount->setItemText(1, QCoreApplication::translate("MainWindow", "30", nullptr));
+        comboBox_candleCount->setItemText(2, QCoreApplication::translate("MainWindow", "60", nullptr));
+        comboBox_candleCount->setItemText(3, QCoreApplication::translate("MainWindow", "100", nullptr));
+        comboBox_candleCount->setItemText(4, QCoreApplication::translate("MainWindow", "ALL", nullptr));
+
+        label_latestDay->setText(QCoreApplication::translate("MainWindow", " Latest Day:", nullptr));
+        label_changeField->setText(QString());
+        label_open->setText(QCoreApplication::translate("MainWindow", " Open:", nullptr));
+        label_high->setText(QCoreApplication::translate("MainWindow", " High:", nullptr));
+        label_changePercent->setText(QCoreApplication::translate("MainWindow", " Change %:", nullptr));
+        label_change->setText(QCoreApplication::translate("MainWindow", " Change:", nullptr));
         label_priceField->setText(QString());
         label_price->setText(QCoreApplication::translate("MainWindow", " Price:", nullptr));
-        label_latestDay->setText(QCoreApplication::translate("MainWindow", " Latest Day:", nullptr));
-        label_lowField->setText(QString());
-        label_volumeField->setText(QString());
-        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Chart Options</p></body></html>", nullptr));
+        label_seriesType->setText(QCoreApplication::translate("MainWindow", "Series Type:", nullptr));
+        label_highField->setText(QString());
+        label_globalQuoteHeader->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Global Quote</p></body></html>", nullptr));
+        button_updateChart->setText(QCoreApplication::translate("MainWindow", "Update", nullptr));
         menu_file->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 

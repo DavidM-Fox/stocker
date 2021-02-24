@@ -59,6 +59,15 @@ void MainWindow::setupMainWindow()
             &MainWindow::on_newSymbol);
     connect(ui->lineEdit_symbol, SIGNAL(textChanged(const QString &)), this,
             SLOT(toUpper(const QString &)));
+
+    connect(ui->comboBox_seriesType, SIGNAL(activated(const int &)), this,
+            SLOT(setSeriesType(const int &)));
+
+    connect(ui->comboBox_candleCount, SIGNAL(activated(const int &)), this,
+            SLOT(setCandleCount(const int &)));
+
+    connect(ui->button_updateChart, &QPushButton::released, this,
+            &MainWindow::on_updateChart);
 }
 
 /**
@@ -96,65 +105,63 @@ void MainWindow::on_newSymbol()
         dialog.exec();
     }
     else {
+        qDebug() << "Success: An API Key was found to use for avapi::quote";
         std::string symbol = ui->lineEdit_symbol->text().toStdString();
         avapi::Quote quote(symbol, m_apiKey);
         avapi::time_pair global_quote;
-        avapi::time_series series = quote.getTimeSeries(avapi::DAILY, 30);
+        avapi::time_series series;
 
+        // Catch
         try {
             global_quote = quote.getGlobalQuote();
-            ui->label_symbolField->setText(QString::fromStdString(symbol));
-            ui->label_latestDayField->setText(
-                QDateTime::fromSecsSinceEpoch(global_quote.first)
-                    .toString("yyyy-MM-dd"));
-            ui->label_openField->setText(
-                QString::number(global_quote.second[0]));
-            ui->label_highField->setText(
-                QString::number(global_quote.second[1]));
-            ui->label_lowField->setText(
-                QString::number(global_quote.second[2]));
-            ui->label_priceField->setText(
-                QString::number(global_quote.second[3]));
-            ui->label_volumeField->setText(
-                QString::number(global_quote.second[4]));
-            ui->label_previousCloseField->setText(
-                QString::number(global_quote.second[5]));
-            ui->label_changeField->setText(
-                QString::number(global_quote.second[6]));
-            ui->label_changePercentField->setText(
-                QString::number(global_quote.second[7]));
-
-            ui->frame_stockInfo->show();
-
-            if (m_chartView == NULL) {
-
-                // Creating the initial chart view
-                m_chartView = new QCandlestickChartView();
-                m_chartView->setChartTitle(QString::fromStdString(symbol));
-                m_chartView->addAvapiSeries(
-                    series, QString::fromStdString("Last 30 Days"),
-                    avapi::DAILY);
-                m_chartView->setViewDefaults();
-                m_chartView->setChartDefaults();
-                ui->layout_chartView->addWidget(m_chartView);
-            }
-            else {
-                // Change Chart Data
-                m_chartView->chart()->removeAllSeries();
-                m_chartView->setChartTitle(QString::fromStdString(symbol));
-                m_chartView->addAvapiSeries(
-                    series, QString::fromStdString("Last 30 Days"),
-                    avapi::DAILY);
-                m_chartView->setViewDefaults();
-                m_chartView->setChartDefaults();
-            }
+            series = quote.getTimeSeries(avapi::INTRADAY, 10, "15min");
         }
         catch (...) {
-            qDebug() << "Exception: An incorrect API key or symbol was set.";
+            qDebug() << "An exception occured when trying to get symbol data: "
+                        "Incorrect API key, stock symbol, or connection error.";
             QMessageBox dialog(this);
             dialog.setText("Incorrect API Key/Symbol, or max number of queries "
                            "reached last minute (Max 5 per minute).");
             dialog.exec();
+            return;
+        }
+
+        ui->label_symbolField->setText(QString::fromStdString(symbol));
+        ui->label_latestDayField->setText(
+            QDateTime::fromSecsSinceEpoch(global_quote.first)
+                .toString("yyyy-MM-dd"));
+        ui->label_openField->setText(QString::number(global_quote.second[0]));
+        ui->label_highField->setText(QString::number(global_quote.second[1]));
+        ui->label_lowField->setText(QString::number(global_quote.second[2]));
+        ui->label_priceField->setText(QString::number(global_quote.second[3]));
+        ui->label_volumeField->setText(QString::number(global_quote.second[4]));
+        ui->label_previousCloseField->setText(
+            QString::number(global_quote.second[5]));
+        ui->label_changeField->setText(QString::number(global_quote.second[6]));
+        ui->label_changePercentField->setText(
+            QString::number(global_quote.second[7]));
+
+        ui->frame_stockInfo->show();
+
+        if (m_chartView == NULL) {
+
+            // Creating the initial chart view
+            m_chartView = new QCandlestickChartView();
+            m_chartView->setChartTitle(QString::fromStdString(symbol));
+            m_chartView->addAvapiSeries(
+                series, QString::fromStdString("Intraday"), avapi::INTRADAY);
+            m_chartView->setViewDefaults();
+            m_chartView->setChartDefaults();
+            ui->layout_chartView->addWidget(m_chartView);
+        }
+        else {
+            // Change Chart Data
+            m_chartView->chart()->removeAllSeries();
+            m_chartView->setChartTitle(QString::fromStdString(symbol));
+            m_chartView->addAvapiSeries(
+                series, QString::fromStdString("Intraday"), avapi::DAILY);
+            m_chartView->setViewDefaults();
+            m_chartView->setChartDefaults();
         }
     }
 }
@@ -170,3 +177,74 @@ void MainWindow::toUpper(const QString &text)
         return;
     le->setText(text.toUpper());
 }
+
+/**
+ * @brief SLOT - Set m_seriesType and m_intradayInterval when
+ * comboBox_seriesType is activated
+ * @param i The combo box index
+ */
+void MainWindow::setSeriesType(const int &i)
+{
+    // Set m_seriesType function
+    m_seriesTitle = m_seriesTitleVect[i];
+    m_seriesType = m_seriesTypeVect[i];
+    m_intradayInterval = m_intradayIntervalVect[i];
+}
+
+/**
+ * @brief SLOT - Set m_candleCount when
+ * comboBox_candleCount is activated
+ * @param i The combo box index
+ */
+void MainWindow::setCandleCount(const int &i)
+{
+    m_candleCount = m_candleCountVect[i];
+}
+
+void MainWindow::on_updateChart()
+{
+    // Create new quote object
+    std::string symbol = ui->label_symbolField->text().toStdString();
+    avapi::Quote quote(symbol, m_apiKey);
+    avapi::time_series series;
+
+    // Try to get new time series
+    try {
+        series = quote.getTimeSeries(m_seriesType, m_candleCount,
+                                     m_intradayInterval);
+    }
+    catch (...) {
+        qDebug() << "An exception occured when trying to get symbol data: "
+                    "Cannot query Alpha Vantage server. Either no connection "
+                    "or too many API calls in last minute.";
+        QMessageBox dialog(this);
+        dialog.setText("Max number of queries "
+                       "reached last minute (Max 5 per minute).");
+        dialog.exec();
+        return;
+    }
+
+    // Remove Last Chart
+    ui->layout_chartView->removeWidget(m_chartView);
+    delete m_chartView;
+    m_chartView = new QCandlestickChartView();
+
+    // Change Chart Data
+    // m_chartView->chart()->removeAllSeries();
+    m_chartView->setChartTitle(QString::fromStdString(symbol));
+    m_chartView->addAvapiSeries(series, m_seriesTitle, m_seriesType);
+    m_chartView->setViewDefaults();
+    m_chartView->setChartDefaults();
+    ui->layout_chartView->addWidget(m_chartView);
+}
+
+std::vector<QString> MainWindow::m_seriesTitleVect{
+    QString::fromStdString("Intraday 15min"),
+    QString::fromStdString("Intraday 30min"), QString::fromStdString("Daily"),
+    QString::fromStdString("Weekly"), QString::fromStdString("Monthly")};
+std::vector<avapi::function> MainWindow::m_seriesTypeVect{
+    avapi::INTRADAY, avapi::INTRADAY, avapi::DAILY, avapi::WEEKLY,
+    avapi::MONTHLY};
+std::vector<std::string> MainWindow::m_intradayIntervalVect{"15min", "30min",
+                                                            "", "", ""};
+std::vector<size_t> MainWindow::m_candleCountVect{10, 30, 60, 100, 0};

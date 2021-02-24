@@ -509,8 +509,8 @@ p, li { white-space: pre-wrap; }
               <property name="spacing">
                <number>1</number>
               </property>
-              <item row="4" column="1">
-               <widget class="QLabel" name="label_highField">
+              <item row="8" column="1">
+               <widget class="QLabel" name="label_previousCloseField">
                 <property name="frameShape">
                  <enum>QFrame::Panel</enum>
                 </property>
@@ -519,6 +519,78 @@ p, li { white-space: pre-wrap; }
                 </property>
                 <property name="text">
                  <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="0" colspan="2">
+               <widget class="QLabel" name="label_chartOptions">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <property name="lineWidth">
+                 <number>2</number>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Chart Options&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_previousClose">
+                <property name="text">
+                 <string> Previous Close:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="1">
+               <widget class="QComboBox" name="comboBox_seriesType">
+                <item>
+                 <property name="text">
+                  <string>Intraday - 15min</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Intraday - 30min</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Daily</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Weekly</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Monthly</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_symbolField">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_low">
+                <property name="text">
+                 <string> Low:</string>
                 </property>
                </widget>
               </item>
@@ -535,15 +607,8 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
-               <widget class="QLabel" name="label_changePercent">
-                <property name="text">
-                 <string> Change %:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="1">
-               <widget class="QLabel" name="label_changeField">
+              <item row="5" column="1">
+               <widget class="QLabel" name="label_lowField">
                 <property name="frameShape">
                  <enum>QFrame::Panel</enum>
                 </property>
@@ -552,40 +617,6 @@ p, li { white-space: pre-wrap; }
                 </property>
                 <property name="text">
                  <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
-               <widget class="QLabel" name="label_previousCloseField">
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_previousClose">
-                <property name="text">
-                 <string> Previous Close:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0">
-               <widget class="QLabel" name="label_change">
-                <property name="text">
-                 <string> Change:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_open">
-                <property name="text">
-                 <string> Open:</string>
                 </property>
                </widget>
               </item>
@@ -596,15 +627,34 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_high">
+              <item row="7" column="1">
+               <widget class="QLabel" name="label_volumeField">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
                 <property name="text">
-                 <string> High:</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item row="2" column="1">
                <widget class="QLabel" name="label_latestDayField">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="1">
+               <widget class="QLabel" name="label_changePercentField">
                 <property name="frameShape">
                  <enum>QFrame::Panel</enum>
                 </property>
@@ -623,8 +673,51 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
-               <widget class="QLabel" name="label_changePercentField">
+              <item row="13" column="0">
+               <widget class="QLabel" name="label_candleCount">
+                <property name="text">
+                 <string>Candle Count:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="1">
+               <widget class="QComboBox" name="comboBox_candleCount">
+                <item>
+                 <property name="text">
+                  <string>10</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>30</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>60</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>100</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ALL</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_latestDay">
+                <property name="text">
+                 <string> Latest Day:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLabel" name="label_changeField">
                 <property name="frameShape">
                  <enum>QFrame::Panel</enum>
                 </property>
@@ -636,8 +729,36 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="label_symbolField">
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_open">
+                <property name="text">
+                 <string> Open:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_high">
+                <property name="text">
+                 <string> High:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="label_changePercent">
+                <property name="text">
+                 <string> Change %:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="label_change">
+                <property name="text">
+                 <string> Change:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLabel" name="label_priceField">
                 <property name="frameShape">
                  <enum>QFrame::Panel</enum>
                 </property>
@@ -649,7 +770,34 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="12" column="0" colspan="2">
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_price">
+                <property name="text">
+                 <string> Price:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0">
+               <widget class="QLabel" name="label_seriesType">
+                <property name="text">
+                 <string>Series Type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="label_highField">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="0" colspan="2">
                <spacer name="verticalSpacer">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -661,13 +809,6 @@ p, li { white-space: pre-wrap; }
                  </size>
                 </property>
                </spacer>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_low">
-                <property name="text">
-                 <string> Low:</string>
-                </property>
-               </widget>
               </item>
               <item row="0" column="0" colspan="2" alignment="Qt::AlignTop">
                <widget class="QLabel" name="label_globalQuoteHeader">
@@ -694,72 +835,10 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
-               <widget class="QLabel" name="label_priceField">
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
-                </property>
+              <item row="14" column="0" colspan="2" alignment="Qt::AlignHCenter">
+               <widget class="QPushButton" name="button_updateChart">
                 <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_price">
-                <property name="text">
-                 <string> Price:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_latestDay">
-                <property name="text">
-                 <string> Latest Day:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QLabel" name="label_lowField">
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QLabel" name="label_volumeField">
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="0" colspan="2">
-               <widget class="QLabel" name="label">
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <property name="lineWidth">
-                 <number>2</number>
-                </property>
-                <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Chart Options&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>Update</string>
                 </property>
                </widget>
               </item>
