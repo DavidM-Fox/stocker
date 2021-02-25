@@ -1,5 +1,5 @@
 # stocker
-A desktop application built with C++ and Qt for viewing historical stock data pulled from [Alpha Vantage](https://www.alphavantage.co/). This application was created to showcase an example implementation of both [avapi](https://github.com/DavidM-Fox/avapi) and [QCandlestickChartView](https://github.com/DavidM-Fox/QCandlestickChartView).
+A desktop application built with C++ and [Qt](https://www.qt.io/) for viewing historical stock data pulled from [Alpha Vantage](https://www.alphavantage.co/). This application was created to showcase an example implementation of both [avapi](https://github.com/DavidM-Fox/avapi) and [QCandlestickChartView](https://github.com/DavidM-Fox/QCandlestickChartView).
 
 # Prerequisites
 Before using stocker, an Alpha Vantage API key must be retrieved from [here](https://www.alphavantage.co/support/#api-key). This key can be saved to an ```api.key``` file within the project root directory or entered on the home page of stocker. In addition, this application requires the following libraries:
@@ -11,7 +11,7 @@ Before using stocker, an Alpha Vantage API key must be retrieved from [here](htt
 # Demo
 ## Entering an API Key
 
-An Alpha Vantage API Key can be entered on stocker's home page. Stocker will also look for an ```api.key``` file by default within the project's root directory and read a key from it.
+By default, stocker will look for ```api.key``` within the project's root directory and read an Alpha Vantage API key from it. The key can be entered on stocker's home page if desired.
 
 <img src="demo/demo1.gif" width="800" height="600"/>
 
@@ -23,7 +23,7 @@ On the stock page, a symbol of interest can be entered to display both a global 
 
 ## Changing Symbol of Iterest
 
-The symbol of interest can be chaged at will.
+The symbol of interest can be changed at will.
 
 <img src="demo/demo3.gif" width="800" height="600"/>
 
