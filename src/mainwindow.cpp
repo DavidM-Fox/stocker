@@ -10,7 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
       icon_dir("C:/github/stocker/icons/"),
       icon_homeView(icon_dir + "icons8-home-64.png"),
       icon_stockView(icon_dir + "icons8-stocks-64.png"),
-      icon_newSymbol(icon_dir + "icons8-plus-64.png"), m_apiKey("")
+      icon_newSymbol(icon_dir + "icons8-plus-64.png"), m_apiKey(""),
+      m_seriesType(avapi::DAILY), m_candleCount(30), m_intradayInterval(""),
+      m_seriesTitle(QString::fromStdString("Daily"))
 {
     // Import ui from QT Designer
     ui->setupUi(this);
@@ -114,7 +116,8 @@ void MainWindow::on_newSymbol()
         // Catch
         try {
             global_quote = quote.getGlobalQuote();
-            series = quote.getTimeSeries(avapi::INTRADAY, 10, "15min");
+            series = quote.getTimeSeries(m_seriesType, m_candleCount,
+                                         m_intradayInterval);
         }
         catch (...) {
             qDebug() << "An exception occured when trying to get symbol data: "
@@ -126,6 +129,7 @@ void MainWindow::on_newSymbol()
             return;
         }
 
+        // Setup frame_stockInfo
         ui->label_symbolField->setText(QString::fromStdString(symbol));
         ui->label_latestDayField->setText(
             QDateTime::fromSecsSinceEpoch(global_quote.first)
@@ -140,7 +144,8 @@ void MainWindow::on_newSymbol()
         ui->label_changeField->setText(QString::number(global_quote.second[6]));
         ui->label_changePercentField->setText(
             QString::number(global_quote.second[7]));
-
+        ui->comboBox_seriesType->setCurrentIndex(2);
+        ui->comboBox_candleCount->setCurrentIndex(1);
         ui->frame_stockInfo->show();
 
         if (m_chartView == NULL) {
@@ -148,20 +153,23 @@ void MainWindow::on_newSymbol()
             // Creating the initial chart view
             m_chartView = new QCandlestickChartView();
             m_chartView->setChartTitle(QString::fromStdString(symbol));
-            m_chartView->addAvapiSeries(
-                series, QString::fromStdString("Intraday"), avapi::INTRADAY);
+            m_chartView->addAvapiSeries(series, m_seriesTitle, m_seriesType);
             m_chartView->setViewDefaults();
             m_chartView->setChartDefaults();
             ui->layout_chartView->addWidget(m_chartView);
         }
         else {
-            // Change Chart Data
-            m_chartView->chart()->removeAllSeries();
+            // Remove Last Chart
+            ui->layout_chartView->removeWidget(m_chartView);
+            delete m_chartView;
+
+            // Add new chart
+            m_chartView = new QCandlestickChartView();
             m_chartView->setChartTitle(QString::fromStdString(symbol));
-            m_chartView->addAvapiSeries(
-                series, QString::fromStdString("Intraday"), avapi::DAILY);
+            m_chartView->addAvapiSeries(series, m_seriesTitle, m_seriesType);
             m_chartView->setViewDefaults();
             m_chartView->setChartDefaults();
+            ui->layout_chartView->addWidget(m_chartView);
         }
     }
 }
