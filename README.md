@@ -27,7 +27,7 @@ The symbol of interest can be changed at will.
 
 <img src="demo/demo3.gif" width="800" height="600"/>
 
-## Changing Chart Options
+## Chart Options
 
 Within the chart options, the series type and candle count can be set to change the chart view.
 
